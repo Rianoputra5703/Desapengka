@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desa Pengka — Resmi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0a1628;
+      --blue:      #1a3a6b;
+      --sky:       #2563eb;
+      --sky-lt:    #3b82f6;
+      --gold:      #f59e0b;
+      --surface:   #f0f4fb;
+      --white:     #ffffff;
+      --text:      #0f172a;
+      --text-dim:  #475569;
+      --border:    #cbd5e1;
+      --serif:     'Playfair Display', serif;
+      --sans:      'Inter', sans-serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.78rem;
+      padding: 0.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+    }
+    .topbar a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .topbar a:hover { color: var(--gold); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 1px 8px rgba(10,22,40,0.08);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none;
+    }
+    .nav-emblem {
+      width: 42px; height: 42px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .nav-brand-text { line-height: 1.2; }
+    .nav-brand-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .nav-brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-family: var(--mono);
+      letter-spacing: 0.06em;
+    }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sky); }
+    .nav-cta {
+      padding: 0.55rem 1.4rem;
+      background: var(--sky);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.82rem; font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--sky-lt); }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e4d9b 100%);
+      color: white;
+      padding: 5rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("images.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
+      z-index: 0;
+    }
+    #hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(26,58,107,0.65) 60%, rgba(30,77,155,0.70) 100%);
+      z-index: 0;
+    }
+    .hero-inner {
+      max-width: 900px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before { content: '🏛'; font-size: 0.9rem; }
+    h1.hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    h1.hero-title span { color: var(--gold); }
+    .hero-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-hero {
+      padding: 0.8rem 1.8rem;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 6px;
+      font-weight: 700; font-size: 0.875rem;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .btn-hero:hover { transform: translateY(-2px); background: #fbbf24; }
+    .btn-hero-outline {
+      padding: 0.8rem 1.8rem;
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      font-weight: 500; font-size: 0.875rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-hero-outline:hover { border-color: white; color: white; }
+    .hero-stats {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+      min-width: 130px;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem; font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 2.5rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--sky);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--sky);
+      display: inline-block;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 0.97rem;
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROFIL ── */
+    #profil { background: var(--surface); }
+    .profil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .profil-text p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .profil-text p strong { color: var(--navy); }
+    .profil-info-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .profil-info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 0.9rem 1rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      border-left: 3px solid var(--sky);
+    }
+    .profil-info-icon { font-size: 1.2rem; }
+    .profil-info-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--sky);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .profil-info-value {
+      font-size: 0.9rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    /* ── BERITA ── */
+    #berita { background: var(--white); }
+    .berita-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .berita-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .berita-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.12); transform: translateY(-3px); }
+    .berita-img {
+      height: 160px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .berita-body { padding: 1.2rem; }
+    .berita-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--sky);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(37,99,235,0.08);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .berita-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .berita-excerpt {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .berita-meta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ── LAYANAN ── */
+    #layanan { background: var(--surface); }
+    .layanan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .layanan-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .layanan-card:hover { border-color: var(--sky); box-shadow: 0 4px 16px rgba(37,99,235,0.1); }
+    .layanan-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .layanan-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .layanan-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ── GALERI ── */
+    #galeri { background: var(--navy); }
+    #galeri .section-title { color: white; }
+    #galeri .section-desc { color: rgba(255,255,255,0.6); }
+    #galeri .section-eyebrow { color: var(--gold); }
+    #galeri .section-eyebrow::before { background: var(--gold); }
+    .galeri-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 0.8rem;
+    }
+    .galeri-item {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .galeri-item:hover { transform: scale(1.03); }
+    .galeri-item:nth-child(1) { background: linear-gradient(135deg, #1e40af, #3b82f6); grid-column: span 2; aspect-ratio: 2/1; }
+    .galeri-item:nth-child(2) { background: linear-gradient(135deg, #065f46, #10b981); }
+    .galeri-item:nth-child(3) { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .galeri-item:nth-child(4) { background: linear-gradient(135deg, #b45309, #f59e0b); }
+    .galeri-item:nth-child(5) { background: linear-gradient(135deg, #be123c, #f43f5e); }
+    .galeri-item:nth-child(6) { background: linear-gradient(135deg, #0369a1, #38bdf8); grid-column: span 2; aspect-ratio: 2/1; }
+
+    /* ── KONTAK ── */
+    #kontak { background: var(--white); }
+    .kontak-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .kontak-info-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .kontak-info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .kontak-icon {
+      width: 40px; height: 40px;
+      background: rgba(37,99,235,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .kontak-item-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--sky);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .kontak-item-value {
+      font-size: 0.9rem;
+      color: var(--navy);
+    }
+    .kontak-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--sky); }
+    .form-group textarea { min-height: 110px; resize: none; }
+    .btn-submit {
+      padding: 0.8rem 2rem;
+      background: var(--sky);
+      color: white;
+      border: none; border-radius: 6px;
+      font-weight: 600; font-size: 0.875rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { background: var(--sky-lt); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 2.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 900px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .footer-brand-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand-desc {
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-col-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.75rem;
+      font-family: var(--mono);
+    }
+    .footer-bottom span b { color: var(--gold); }
+
+    /* ── PENGUMUMAN BANNER ── */
+    .pengumuman {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.6rem 2.5rem;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .profil-grid, .kontak-grid { grid-template-columns: 1fr; }
+      .galeri-grid { grid-template-columns: repeat(2, 1fr); }
+      .galeri-item:nth-child(1), .galeri-item:nth-child(6) { grid-column: span 2; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .topbar { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span>📍 Kec. Welak, Provinsi Nusa Tenggara Timur</span>
+    <span>
+      <a href="tel:+6221123456">📞 (021) 123-456</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:info@desapengka.id">✉ info@desapengka.id</a>
+    </span>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <div class="nav-emblem">🏛</div>
+      <div class="nav-brand-text">
+        <div class="nav-brand-title">Desa Pengka</div>
+        <div class="nav-brand-sub">Pemerintah Desa Resmi</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#berita">Berita</a></li>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <a href="#layanan" class="nav-cta">Layanan Online</a>
+  </nav>
+
+  <!-- PENGUMUMAN -->
+  <div class="pengumuman">
+    📢 Pengumuman: Pelayanan administrasi kependudukan kini tersedia online — <a href="#layanan" style="color:var(--navy);margin-left:0.3rem;text-decoration:underline">Akses di sini →</a>
+  </div>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">Website Resmi Pemerintah Desa</div>
+        <h1 class="hero-title">Selamat Datang di<br><span>Desa Pengka</span></h1>
+        <p class="hero-desc">Melayani masyarakat dengan transparan, profesional, dan penuh dedikasi. Bersama membangun desa yang maju dan sejahtera.</p>
+        <div class="hero-actions">
+          <a href="#layanan" class="btn-hero">Akses Layanan</a>
+          <a href="#profil" class="btn-hero-outline">Profil Desa</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">4.821</div>
+          <div class="stat-label">Jiwa</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1.240</div>
+          <div class="stat-label">KK</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">12</div>
+          <div class="stat-label">RT/RW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <section id="profil">
+    <div class="section-inner">
+      <p class="section-eyebrow">tentang kami</p>
+      <h2 class="section-title">Profil Desa</h2>
+      <p class="section-desc">Mengenal lebih dekat Desa Pengka — sejarah, visi misi, dan komitmen kami kepada masyarakat.</p>
+      <div class="profil-grid">
+        <div class="profil-text">
+          <p>Desa Pengka berdiri sejak tahun <strong>1952</strong> dan merupakan salah satu desa tertua di Kecamatan Pengka. Dengan luas wilayah <strong>1.240 hektar</strong>, desa ini memiliki potensi pertanian dan pariwisata yang besar.</p>
+          <p>Visi kami: <strong>"Mewujudkan Desa Pengka yang Maju, Mandiri, dan Berdaya Saing"</strong> dengan mengedepankan pelayanan publik yang prima dan pembangunan berkelanjutan.</p>
+          <p>Kami berkomitmen untuk menghadirkan pemerintahan yang <strong>transparan dan akuntabel</strong>, serta mendorong partisipasi aktif seluruh warga dalam pembangunan desa.</p>
+        </div>
+        <div class="profil-info-list">
+          <div class="profil-info-item">
+            <div class="profil-info-icon">👤</div>
+            <div>
+              <div class="profil-info-label">Kepala Desa</div>
+              <div class="profil-info-value">Bpk. H. Ahmad Santoso, S.Sos</div>
+            </div>
+          </div>
+          <div class="profil-info-item">
+            <div class="profil-info-icon">📍</div>
+            <div>
+              <div class="profil-info-label">Alamat Kantor</div>
+              <div class="profil-info-value">Jl. Raya Pengka No. 1, RT 01/RW 01</div>
+            </div>
+          </div>
+          <div class="profil-info-item">
+            <div class="profil-info-icon">🕐</div>
+            <div>
+              <div class="profil-info-label">Jam Pelayanan</div>
+              <div class="profil-info-value">Senin–Jumat, 08.00–15.00 WIB</div>
+            </div>
+          </div>
+          <div class="profil-info-item">
+            <div class="profil-info-icon">📅</div>
+            <div>
+              <div class="profil-info-label">Tahun Berdiri</div>
+              <div class="profil-info-value">1952 (73 Tahun)</div>
+            </div>
+          </div>
+          <div class="profil-info-item">
+            <div class="profil-info-icon">🗺</div>
+            <div>
+              <div class="profil-info-label">Luas Wilayah</div>
+              <div class="profil-info-value">1.240 Hektar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERITA -->
+  <section id="berita">
+    <div class="section-inner">
+      <p class="section-eyebrow">informasi terkini</p>
+      <h2 class="section-title">Berita & Pengumuman</h2>
+      <p class="section-desc">Ikuti perkembangan terbaru kegiatan dan program desa kami.</p>
+      <div class="berita-grid">
+        <div class="berita-card">
+          <div class="berita-img">🌾</div>
+          <div class="berita-body">
+            <span class="berita-tag">Pertanian</span>
+            <div class="berita-title">Program Bantuan Bibit Padi Gratis untuk Petani Desa</div>
+            <p class="berita-excerpt">Pemerintah desa menyalurkan bantuan bibit padi unggul kepada 320 petani sebagai upaya meningkatkan hasil panen.</p>
+            <div class="berita-meta">10 Juni 2025</div>
+          </div>
+        </div>
+        <div class="berita-card">
+          <div class="berita-img">🏗</div>
+          <div class="berita-body">
+            <span class="berita-tag">Infrastruktur</span>
+            <div class="berita-title">Pembangunan Jalan Desa Sepanjang 2 KM Dimulai</div>
+            <p class="berita-excerpt">Proyek pelebaran dan pengaspalan jalan utama desa resmi dimulai dengan anggaran dari Dana Desa 2025.</p>
+            <div class="berita-meta">5 Juni 2025</div>
+          </div>
+        </div>
+        <div class="berita-card">
+          <div class="berita-img">📋</div>
+          <div class="berita-body">
+            <span class="berita-tag">Pengumuman</span>
+            <div class="berita-title">Musyawarah Desa: Rencana Anggaran 2025</div>
+            <p class="berita-excerpt">Seluruh warga diundang dalam musyawarah desa untuk membahas rencana anggaran dan pembangunan tahun ini.</p>
+            <div class="berita-meta">1 Juni 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYANAN -->
+  <section id="layanan">
+    <div class="section-inner">
+      <p class="section-eyebrow">pelayanan publik</p>
+      <h2 class="section-title">Layanan Administrasi</h2>
+      <p class="section-desc">Urus berbagai keperluan administrasi kependudukan dengan mudah dan cepat.</p>
+      <div class="layanan-grid">
+        <div class="layanan-card">
+          <div class="layanan-icon">📄</div>
+          <div class="layanan-name">Surat Keterangan</div>
+          <div class="layanan-desc">Surat keterangan domisili, usaha, dan lainnya</div>
+        </div>
+        <div class="layanan-card">
+          <div class="layanan-icon">👶</div>
+          <div class="layanan-name">Akta Kelahiran</div>
+          <div class="layanan-desc">Pengurusan dan penerbitan akta kelahiran</div>
+        </div>
+        <div class="layanan-card">
+          <div class="layanan-icon">🏠</div>
+          <div class="layanan-name">KTP & KK</div>
+          <div class="layanan-desc">Pembuatan dan perubahan KTP serta Kartu Keluarga</div>
+        </div>
+        <div class="layanan-card">
+          <div class="layanan-icon">💒</div>
+          <div class="layanan-name">Surat Nikah</div>
+          <div class="layanan-desc">Pengantar dan rekomendasi pernikahan</div>
+        </div>
+        <div class="layanan-card">
+          <div class="layanan-icon">⚰️</div>
+          <div class="layanan-name">Surat Kematian</div>
+          <div class="layanan-desc">Penerbitan surat keterangan kematian</div>
+        </div>
+        <div class="layanan-card">
+          <div class="layanan-icon">💰</div>
+          <div class="layanan-name">Bantuan Sosial</div>
+          <div class="layanan-desc">Pendaftaran dan pengurusan bantuan sosial</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section id="galeri">
+    <div class="section-inner">
+      <p class="section-eyebrow">dokumentasi</p>
+      <h2 class="section-title">Galeri Desa</h2>
+      <p class="section-desc">Momen dan kegiatan yang mengabadikan kehidupan dan keindahan desa kami.</p>
+      <div class="galeri-grid">
+        <div class="galeri-item">🌅</div>
+        <div class="galeri-item">🌿</div>
+        <div class="galeri-item">🎉</div>
+        <div class="galeri-item">🏘</div>
+        <div class="galeri-item">🤝</div>
+        <div class="galeri-item">🌾</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak">
+    <div class="section-inner">
+      <p class="section-eyebrow">hubungi kami</p>
+      <h2 class="section-title">Kontak & Lokasi</h2>
+      <p class="section-desc">Ada pertanyaan atau keperluan? Hubungi kami atau kunjungi kantor desa langsung.</p>
+      <div class="kontak-grid">
+        <div>
+          <div class="kontak-info-list">
+            <div class="kontak-info-item">
+              <div class="kontak-icon">📍</div>
+              <div>
+                <div class="kontak-item-label">Alamat</div>
+                <div class="kontak-item-value">Jl. Raya Pengka No. 1, RT 01/RW 01,<br>Kec. Welak, Provinsi NTT</div>
+              </div>
+            </div>
+            <div class="kontak-info-item">
+              <div class="kontak-icon">📞</div>
+              <div>
+                <div class="kontak-item-label">Telepon</div>
+                <div class="kontak-item-value">(021) 123-456</div>
+              </div>
+            </div>
+            <div class="kontak-info-item">
+              <div class="kontak-icon">✉</div>
+              <div>
+                <div class="kontak-item-label">Email</div>
+                <div class="kontak-item-value">info@desapengka.id</div>
+              </div>
+            </div>
+            <div class="kontak-info-item">
+              <div class="kontak-icon">🕐</div>
+              <div>
+                <div class="kontak-item-label">Jam Pelayanan</div>
+                <div class="kontak-item-value">Senin – Jumat: 08.00 – 15.00 WIB<br>Sabtu: 08.00 – 12.00 WIB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="kontak-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+              <input type="text" placeholder="Nama kamu" required />
+            </div>
+            <div class="form-group">
+              <label>No. HP / WA</label>
+              <input type="tel" placeholder="08xx-xxxx-xxxx" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Keperluan</label>
+            <select>
+              <option>Informasi Umum</option>
+              <option>Layanan Administrasi</option>
+              <option>Pengaduan</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Pesan</label>
+            <textarea placeholder="Tulis pesan atau pertanyaan kamu..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Kirim Pesan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-title">🏛 Desa Pengka</div>
+          <p class="footer-brand-desc">Website resmi Pemerintah Desa Pengka. Melayani masyarakat dengan tulus dan profesional demi terwujudnya desa yang maju dan sejahtera.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigasi</div>
+          <ul class="footer-links">
+            <li><a href="#profil">Profil Desa</a></li>
+            <li><a href="#berita">Berita</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Layanan</div>
+          <ul class="footer-links">
+            <li><a href="#">Surat Keterangan</a></li>
+            <li><a href="#">KTP & KK</a></li>
+            <li><a href="#">Akta Kelahiran</a></li>
+            <li><a href="#">Bantuan Sosial</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 <b>Pemerintah Desa Pengka</b>. Hak cipta dilindungi.</span>
+        <span>Dibuat dengan <b>HTML + CSS + JS</b></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.berita-card, .layanan-card, .galeri-item, .profil-info-item, .stat-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s';
+      observer.observe(el);
+    });
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Terkirim ✓';
+      btn.style.background = '#16a34a';
+      setTimeout(() => { btn.textContent = 'Kirim Pesan'; btn.style.background = ''; e.target.reset(); }, 3000);
+    }
+  </script>
+
+</body>
+</html>
